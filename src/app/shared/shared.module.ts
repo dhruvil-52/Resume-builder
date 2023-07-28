@@ -5,8 +5,7 @@ import { TablerIconsModule } from 'angular-tabler-icons';
 import * as TablerIcons from 'angular-tabler-icons/icons';
 import { MaterialModule } from './material.module';
 import { NgApexchartsModule } from 'ng-apexcharts';
-
-
+import { TagInputModule } from 'ngx-chips';
 
 @NgModule({
   declarations: [],
@@ -19,7 +18,8 @@ import { NgApexchartsModule } from 'ng-apexcharts';
   exports: [
     TablerIconsModule,
     MaterialModule,
-    NgApexchartsModule
+    NgApexchartsModule,
+    TagInputModule
   ]
 })
 export class SharedModule { }

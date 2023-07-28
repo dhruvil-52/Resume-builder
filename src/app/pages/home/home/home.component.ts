@@ -9,6 +9,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 export class HomeComponent implements OnInit {
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
+  thirdFormGroup: FormGroup;
 
   constructor(private fb: FormBuilder) { }
 
@@ -29,16 +30,34 @@ export class HomeComponent implements OnInit {
       instagram: '',
       twitter: '',
       quora: '',
-      
+
       skype: '',
       linkedIn: '',
       gitHub: '',
       stackOverflow: '',
-      webSite: '',
+      webSite: ''
     })
 
     this.secondFormGroup = this.fb.group({
-     
+      position: '',
+      company: '',
+      city: '',
+
+      joinedDate: '',
+      leftDate: '',
+      companyDescription: '',
+      rolesAndResponsibility: '',
+      achievements: ''
+    })
+
+    this.thirdFormGroup = this.fb.group({
+      education: '',
+      institution: '',
+      city: '',
+
+      joinedDate: '',
+      leftDate: '',
+      course: ''
     })
   }
 

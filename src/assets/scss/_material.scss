@@ -5,11 +5,19 @@ $animation-duration: 0.4s;
     font-size: 1rem;
     // font-weight: bold;
     transform: translateY(0);
+
+    .info-icn {
+        font-size: smaller;
+    }
 }
 
 @mixin label-active() {
     font-size: 0.75rem;
     transform: translateY(-14px);
+
+    .info-icn {
+        font-size: smaller;
+    }
 }
 
 .form-field {
@@ -104,4 +112,8 @@ $animation-duration: 0.4s;
 
 .text-resize {
     resize: none;
+}
+
+.mat-icon {
+    overflow: inherit !important;
 }
