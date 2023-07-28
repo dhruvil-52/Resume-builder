@@ -10,6 +10,8 @@ export class HomeComponent implements OnInit {
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
   thirdFormGroup: FormGroup;
+  forthFormGroup: FormGroup;
+  fifthFormGroup: FormGroup;
 
   constructor(private fb: FormBuilder) { }
 
@@ -58,6 +60,21 @@ export class HomeComponent implements OnInit {
       joinedDate: '',
       leftDate: '',
       course: ''
+    })
+
+    this.forthFormGroup = this.fb.group({
+      projectName: '',
+      startDate: '',
+      endDate: '',
+      projectDetails: ''
+    })
+
+    this.fifthFormGroup = this.fb.group({
+      skills: '',
+      softSkills: '',
+      interest: '',
+      language: '',
+      certificates: ''
     })
   }
 

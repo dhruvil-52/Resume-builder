@@ -431,4 +431,122 @@
             </button>
         </div>
     </mat-step>
+
+    <mat-step>
+        <ng-template matStepLabel>
+            <span class="title"> Projects </span>
+        </ng-template>
+        <form [formGroup]="forthFormGroup">
+            <div class="row">
+                <div class="col-4">
+                    <div class="form-field">
+                        <div class="form-field-control">
+                            <input id="projectName" type="text" formControlName="projectName" class="form-field-input"
+                                placeholder=" ">
+                            <label for="projectName" class="form-field-label">Project Name</label>
+                            <div class="form-field-bar"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-2">
+                    <div class="form-field">
+                        <div class="form-field-control">
+                            <input id="startDate" type="text" formControlName="startDate" class="form-field-input"
+                                placeholder=" ">
+                            <label for="startDate" class="form-field-label">Start Date</label>
+                            <div class="form-field-bar"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-2">
+                    <div class="form-field">
+                        <div class="form-field-control">
+                            <input id="endDate" type="text" formControlName="endDate" class="form-field-input"
+                                placeholder=" ">
+                            <label for="endDate" class="form-field-label">End Date
+                                <mat-icon matTooltip="If you still working then write Running"
+                                    class="info-icn">info</mat-icon>
+                            </label>
+                            <div class="form-field-bar"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="form-field">
+                        <div class="form-field-control">
+                            <textarea id="projectDetails" type="text" formControlName="projectDetails"
+                                class="form-field-input text-resize" placeholder=" " rows="2"></textarea>
+                            <label for="projectDetails" class="form-field-label">Brief details about Project</label>
+                            <div class="form-field-bar"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div class="example-button-container float-right">
+            <button mat-fab class="btn-navigate mr-2" matStepperPrevious>
+                <mat-icon>navigate_before</mat-icon>
+            </button>
+            <button mat-fab class="btn-navigate" matStepperNext>
+                <mat-icon>navigate_next</mat-icon>
+            </button>
+        </div>
+    </mat-step>
+
+    <mat-step>
+        <ng-template matStepLabel>
+            <span class="title"> Other Details </span>
+        </ng-template>
+        <form [formGroup]="fifthFormGroup">
+            <div class="row">
+                <div class="col-12">
+                    <div class="form-field">
+                        <div class="form-field-control">
+                            <tag-input id="skills" [modelAsStrings]="true" formControlName="skills"
+                                [placeholder]="'+ Skills (press Enter)' " [allowDupes]="false"
+                                [secondaryPlaceholder]="'Type Skills & Enter'">
+                            </tag-input>
+                            <div class="form-field-bar"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="form-field">
+                        <div class="form-field-control">
+                            <tag-input id="softSkills" [modelAsStrings]="true" formControlName="softSkills"
+                                [placeholder]="'+ Soft Skills (press Enter)' " [allowDupes]="false"
+                                [secondaryPlaceholder]="'Type Soft Skills & Enter'">
+                            </tag-input>
+                            <div class="form-field-bar"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="form-field">
+                        <div class="form-field-control">
+                            <tag-input id="interest" [modelAsStrings]="true" formControlName="interest"
+                                [placeholder]="'+ Interest (press Enter)' " [allowDupes]="false"
+                                [secondaryPlaceholder]="'Type Interest & Enter'">
+                            </tag-input>
+                            <div class="form-field-bar"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div class="example-button-container float-right">
+            <button mat-fab class="btn-navigate mr-2" matStepperPrevious>
+                <mat-icon>navigate_before</mat-icon>
+            </button>
+            <button mat-fab class="btn-navigate" matStepperNext>
+                <mat-icon>navigate_next</mat-icon>
+            </button>
+        </div>
+    </mat-step>
 </mat-stepper>
