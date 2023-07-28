@@ -1,0 +1,224 @@
+<mat-vertical-stepper [linear]="false" #stepper [animationDuration]="'500'">
+    <form [formGroup]="firstFormGroup">
+        <mat-step>
+            <ng-template matStepLabel>
+                <span class="title"> Personal Details</span>
+            </ng-template>
+            <div class="row">
+                <div class="col-4">
+                    <div class="form-field">
+                        <div class="form-field-control">
+                            <input id="firstName" type="text" formControlName="firstName" class="form-field-input"
+                                placeholder=" ">
+                            <label for="firstName" class="form-field-label">First Name</label>
+                            <div class="form-field-bar"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="form-field">
+                        <div class="form-field-control">
+                            <input id="lastName" type="text" formControlName="lastName" class="form-field-input"
+                                placeholder=" ">
+                            <label for="lastName" class="form-field-label">Last Name</label>
+                            <div class="form-field-bar"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="form-field">
+                        <div class="form-field-control">
+                            <input id="designation" type="text" formControlName="designation" class="form-field-input"
+                                placeholder=" ">
+                            <label for="designation" class="form-field-label">Designation</label>
+                            <div class="form-field-bar"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="form-field">
+                        <div class="form-field-control">
+                            <textarea id="aboutYourSelf" type="text" formControlName="aboutYourSelf"
+                                class="form-field-input text-resize" placeholder=" " rows="2"></textarea>
+                            <label for="aboutYourSelf" class="form-field-label">Short and Engaging pitch about
+                                yourself.</label>
+                            <div class="form-field-bar"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </mat-step>
+
+        <mat-step>
+            <ng-template matStepLabel>
+                <span class="title">Main Contact</span>
+            </ng-template>
+            <div class="row">
+                <div class="col-4">
+                    <div class="form-field">
+                        <div class="form-field-control">
+                            <input id="email" type="text" formControlName="email" class="form-field-input"
+                                placeholder=" ">
+                            <label for="email" class="form-field-label">Email</label>
+                            <div class="form-field-bar"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="form-field">
+                        <div class="form-field-control">
+                            <input id="phone" type="text" formControlName="phone" class="form-field-input"
+                                placeholder=" ">
+                            <label for="phone" class="form-field-label">Phone</label>
+                            <div class="form-field-bar"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4">
+                    <div class="form-field">
+                        <div class="form-field-control">
+                            <input id="city" type="text" formControlName="city" class="form-field-input"
+                                placeholder=" ">
+                            <label for="city" class="form-field-label">City</label>
+                            <div class="form-field-bar"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="form-field">
+                        <div class="form-field-control">
+                            <input id="state" type="text" formControlName="state" class="form-field-input"
+                                placeholder=" ">
+                            <label for="state" class="form-field-label">State</label>
+                            <div class="form-field-bar"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="form-field">
+                        <div class="form-field-control">
+                            <input id="country" type="text" formControlName="country" class="form-field-input"
+                                placeholder=" ">
+                            <label for="country" class="form-field-label">Country</label>
+                            <div class="form-field-bar"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </mat-step>
+
+        <mat-step>
+            <ng-template matStepLabel>
+                <span class="title">General/Social Media</span>
+            </ng-template>
+            <div class="row">
+                <div class="col-4">
+                    <div class="form-field">
+                        <div class="form-field-control">
+                            <input id="facebook" type="text" formControlName="facebook" class="form-field-input"
+                                placeholder=" ">
+                            <label for="facebook" class="form-field-label">Facebook</label>
+                            <div class="form-field-bar"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="form-field">
+                        <div class="form-field-control">
+                            <input id="instagram" type="text" formControlName="instagram" class="form-field-input"
+                                placeholder=" ">
+                            <label for="instagram" class="form-field-label">Instagram</label>
+                            <div class="form-field-bar"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="form-field">
+                        <div class="form-field-control">
+                            <input id="twitter" type="text" formControlName="twitter" class="form-field-input"
+                                placeholder=" ">
+                            <label for="twitter" class="form-field-label">Twitter</label>
+                            <div class="form-field-bar"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4">
+                    <div class="form-field">
+                        <div class="form-field-control">
+                            <input id="quora" type="text" formControlName="quora" class="form-field-input"
+                                placeholder=" ">
+                            <label for="quora" class="form-field-label">Quora</label>
+                            <div class="form-field-bar"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </mat-step>
+
+        <mat-step>
+            <ng-template matStepLabel>
+                <span class="title">Coding Platform</span>
+            </ng-template>
+            <div class="row">
+                <div class="col-4">
+                    <div class="form-field">
+                        <div class="form-field-control">
+                            <input id="skype" type="text" formControlName="skype" class="form-field-input"
+                                placeholder=" ">
+                            <label for="skype" class="form-field-label">skype</label>
+                            <div class="form-field-bar"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="form-field">
+                        <div class="form-field-control">
+                            <input id="linkedIn" type="text" formControlName="linkedIn" class="form-field-input"
+                                placeholder=" ">
+                            <label for="linkedIn" class="form-field-label">linkedIn</label>
+                            <div class="form-field-bar"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="form-field">
+                        <div class="form-field-control">
+                            <input id="gitHub" type="text" formControlName="gitHub" class="form-field-input"
+                                placeholder=" ">
+                            <label for="gitHub" class="form-field-label">gitHub</label>
+                            <div class="form-field-bar"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4">
+                    <div class="form-field">
+                        <div class="form-field-control">
+                            <input id="stackOverflow" type="text" formControlName="stackOverflow" class="form-field-input"
+                                placeholder=" ">
+                            <label for="stackOverflow" class="form-field-label">stackOverflow</label>
+                            <div class="form-field-bar"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="form-field">
+                        <div class="form-field-control">
+                            <input id="webSite" type="text" formControlName="webSite" class="form-field-input"
+                                placeholder=" ">
+                            <label for="webSite" class="form-field-label">webSite</label>
+                            <div class="form-field-bar"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </mat-step>
+    </form>
+</mat-vertical-stepper>
