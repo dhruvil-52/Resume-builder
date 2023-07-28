@@ -3,7 +3,14 @@ body {
     height: 100%;
 }
 
-body {
-    margin: 0;
-    font-family: Roboto, "Helvetica Neue", sans-serif;
+.btn-navigate {
+    background-color: #005074 !important;
+}
+
+.float-right {
+    float: right !important;
+}
+
+.mr-2 {
+    margin-right: 2px !important;
 }
