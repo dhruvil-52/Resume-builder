@@ -74,7 +74,11 @@ export class HomeComponent implements OnInit {
       softSkills: '',
       interest: '',
       language: '',
-      certificates: ''
+
+      certificateNames: '',
+      certificateStartDate: '',
+      certificateEndDate: '',
+      certificateDetails: ''
     })
   }
 
