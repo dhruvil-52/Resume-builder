@@ -17,6 +17,6 @@ export class LoginComponent {
   login() {
     console.log("called login");
     localStorage.setItem("loggedInUser", this.user.Username)
-    this.router.navigate(["/home"]);
+    this.router.navigate(["/my-resume"]);
   }
 }
