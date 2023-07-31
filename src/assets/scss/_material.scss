@@ -114,6 +114,8 @@ $animation-duration: 0.4s;
     resize: none;
 }
 
-.mat-icon {
-    overflow: inherit !important;
+label {
+    .mat-icon {
+        overflow: inherit !important;
+    }
 }

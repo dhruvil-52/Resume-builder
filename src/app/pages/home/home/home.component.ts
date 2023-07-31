@@ -223,6 +223,9 @@ export class HomeComponent implements OnInit {
     }
   }
 
+  viewResult() {
+
+  }
 
   ngOnInit(): void {
     this.initForm();
