@@ -1,10 +1,10 @@
 <mat-stepper [linear]="false" #stepper [animationDuration]="'500'">
-    <mat-step>
-        <ng-template matStepLabel>
-            <span class="title"> Personal Details</span>
-        </ng-template>
-        <mat-vertical-stepper [linear]="false" #stepper [animationDuration]="'500'">
-            <form [formGroup]="firstFormGroup">
+    <form [formGroup]="formDetails">
+        <mat-step formGroupName="personalDetails">
+            <ng-template matStepLabel>
+                <span class="title"> Personal Details</span>
+            </ng-template>
+            <mat-vertical-stepper [linear]="false" #stepper [animationDuration]="'500'">
                 <mat-step>
                     <ng-template matStepLabel>
                         <span class="title"> Personal Details</span>
@@ -225,386 +225,430 @@
                         </div>
                     </div>
                 </mat-step>
-            </form>
-        </mat-vertical-stepper>
-        <div class="example-button-container float-right">
-            <button mat-fab class="btn-navigate" matStepperNext>
-                <mat-icon>navigate_next</mat-icon>
-            </button>
-        </div>
-    </mat-step>
-
-    <mat-step>
-        <ng-template matStepLabel>
-            <span class="title"> Work Experience</span>
-        </ng-template>
-        <form [formGroup]="secondFormGroup">
-            <div class="row">
-                <div class="col-4">
-                    <div class="form-field">
-                        <div class="form-field-control">
-                            <input id="position" type="text" formControlName="position" class="form-field-input"
-                                placeholder=" ">
-                            <label for="position" class="form-field-label">Title/Position</label>
-                            <div class="form-field-bar"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-4">
-                    <div class="form-field">
-                        <div class="form-field-control">
-                            <input id="company" type="text" formControlName="company" class="form-field-input"
-                                placeholder=" ">
-                            <label for="company" class="form-field-label">Company/Work Place</label>
-                            <div class="form-field-bar"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-4">
-                    <div class="form-field">
-                        <div class="form-field-control">
-                            <input id="city" type="text" formControlName="city" class="form-field-input"
-                                placeholder=" ">
-                            <label for="city" class="form-field-label">City/Country</label>
-                            <div class="form-field-bar"></div>
-                        </div>
-                    </div>
-                </div>
+            </mat-vertical-stepper>
+            <div class="example-button-container float-right">
+                <button type="button" mat-fab class="btn-navigate" matStepperNext>
+                    <mat-icon>navigate_next</mat-icon>
+                </button>
             </div>
-            <div class="row">
-                <div class="col-2">
-                    <div class="form-field">
-                        <div class="form-field-control">
-                            <input id="joinedDate" type="text" formControlName="joinedDate" class="form-field-input"
-                                placeholder=" ">
-                            <label for="joinedDate" class="form-field-label">Joined Date</label>
-                            <div class="form-field-bar"></div>
+        </mat-step>
+
+        <mat-step formArrayName="experienceDetails">
+            <ng-template matStepLabel>
+                <span class="title"> Work Experience</span>
+            </ng-template>
+
+            <div *ngFor="let data of ExperienceDetails.controls; let i = index" [formGroupName]="i">
+                <div class="row">
+                    <div class="col-12">
+                        <button type="button" mat-fab class="btn-operation float-right btn-sm"
+                            (click)="addExperience()"> +
+                        </button>
+                        <button type="button" mat-fab class="btn-operation float-right btn-sm mr-2"
+                            (click)="removeExperience(i)"> - </button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-4">
+                        <div class="form-field">
+                            <div class="form-field-control">
+                                <input id="position" type="text" formControlName="position" class="form-field-input"
+                                    placeholder=" ">
+                                <label for="position" class="form-field-label">Title/Position</label>
+                                <div class="form-field-bar"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="form-field">
+                            <div class="form-field-control">
+                                <input id="company" type="text" formControlName="company" class="form-field-input"
+                                    placeholder=" ">
+                                <label for="company" class="form-field-label">Company/Work Place</label>
+                                <div class="form-field-bar"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="form-field">
+                            <div class="form-field-control">
+                                <input id="city" type="text" formControlName="city" class="form-field-input"
+                                    placeholder=" ">
+                                <label for="city" class="form-field-label">City/Country</label>
+                                <div class="form-field-bar"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-2">
-                    <div class="form-field">
-                        <div class="form-field-control">
-                            <input id="leftDate" type="text" formControlName="leftDate" class="form-field-input"
-                                placeholder=" ">
-                            <label for="leftDate" class="form-field-label">Left Date
-                                <mat-icon matTooltip="If you still working then write Present"
-                                    class="info-icn">info</mat-icon>
-                            </label>
-                            <div class="form-field-bar"></div>
+                <div class="row">
+                    <div class="col-2">
+                        <div class="form-field">
+                            <div class="form-field-control">
+                                <input id="joinedDate" type="text" formControlName="joinedDate" class="form-field-input"
+                                    placeholder=" ">
+                                <label for="joinedDate" class="form-field-label">Joined Date</label>
+                                <div class="form-field-bar"></div>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-8">
-                    <div class="form-field">
-                        <div class="form-field-control">
-                            <!-- <input id="achievements" type="text" formControlName="achievements" class="form-field-input"
+                    <div class="col-2">
+                        <div class="form-field">
+                            <div class="form-field-control">
+                                <input id="leftDate" type="text" formControlName="leftDate" class="form-field-input"
+                                    placeholder=" ">
+                                <label for="leftDate" class="form-field-label">Left Date
+                                    <mat-icon matTooltip="If you still working then write Present"
+                                        class="info-icn">info</mat-icon>
+                                </label>
+                                <div class="form-field-bar"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-8">
+                        <div class="form-field">
+                            <div class="form-field-control">
+                                <!-- <input id="achievements" type="text" formControlName="achievements" class="form-field-input"
                                 placeholder=" "> -->
-                            <tag-input id="achievements" [modelAsStrings]="true" formControlName="achievements"
-                                [placeholder]="'+ Achievements' " [allowDupes]="false"
-                                [secondaryPlaceholder]="'Type Achievements & Enter'">
-                            </tag-input>
-                            <!-- <label for="achievements" class="form-field-label">Achievements/Tasks</label> -->
-                            <div class="form-field-bar"></div>
+                                <tag-input id="achievements" [modelAsStrings]="true" formControlName="achievements"
+                                    [placeholder]="'+ Achievements' " [allowDupes]="false"
+                                    [secondaryPlaceholder]="'Type Achievements & Enter'">
+                                </tag-input>
+                                <!-- <label for="achievements" class="form-field-label">Achievements/Tasks</label> -->
+                                <div class="form-field-bar"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-4">
+                        <div class="form-field">
+                            <div class="form-field-control">
+                                <textarea id="companyDescription" type="text" formControlName="companyDescription"
+                                    class="form-field-input text-resize" placeholder=" " rows="2"></textarea>
+                                <label for="companyDescription" class="form-field-label">Description of
+                                    Company</label>
+                                <div class="form-field-bar"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="form-field">
+                            <div class="form-field-control">
+                                <textarea id="rolesAndResponsibility" type="text"
+                                    formControlName="rolesAndResponsibility" class="form-field-input text-resize"
+                                    placeholder=" " rows="2"></textarea>
+                                <label for="rolesAndResponsibility" class="form-field-label">Roles And Responsibility
+                                </label>
+                                <div class="form-field-bar"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-4">
-                    <div class="form-field">
-                        <div class="form-field-control">
-                            <textarea id="companyDescription" type="text" formControlName="companyDescription"
-                                class="form-field-input text-resize" placeholder=" " rows="2"></textarea>
-                            <label for="companyDescription" class="form-field-label">Description of
-                                Company</label>
-                            <div class="form-field-bar"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-4">
-                    <div class="form-field">
-                        <div class="form-field-control">
-                            <textarea id="rolesAndResponsibility" type="text" formControlName="rolesAndResponsibility"
-                                class="form-field-input text-resize" placeholder=" " rows="2"></textarea>
-                            <label for="rolesAndResponsibility" class="form-field-label">Roles And Responsibility
-                            </label>
-                            <div class="form-field-bar"></div>
-                        </div>
-                    </div>
-                </div>
+            <div class="example-button-container float-right">
+                <button type="button" mat-fab class="btn-navigate mr-2" matStepperPrevious>
+                    <mat-icon>navigate_before</mat-icon>
+                </button>
+                <button type="button" mat-fab class="btn-navigate" matStepperNext>
+                    <mat-icon>navigate_next</mat-icon>
+                </button>
             </div>
-        </form>
-        <div class="example-button-container float-right">
-            <button mat-fab class="btn-navigate mr-2" matStepperPrevious>
-                <mat-icon>navigate_before</mat-icon>
-            </button>
-            <button mat-fab class="btn-navigate" matStepperNext>
-                <mat-icon>navigate_next</mat-icon>
-            </button>
-        </div>
-    </mat-step>
+        </mat-step>
 
-    <mat-step>
-        <ng-template matStepLabel>
-            <span class="title"> Education </span>
-        </ng-template>
-        <form [formGroup]="thirdFormGroup">
-            <div class="row">
-                <div class="col-4">
-                    <div class="form-field">
-                        <div class="form-field-control">
-                            <input id="education" type="text" formControlName="education" class="form-field-input"
-                                placeholder=" ">
-                            <label for="education" class="form-field-label">Study</label>
-                            <div class="form-field-bar"></div>
+        <mat-step formArrayName="educationDetails">
+            <ng-template matStepLabel>
+                <span class="title"> Education </span>
+            </ng-template>
+            <div *ngFor="let data of EducationDetails.controls; let i = index" [formGroupName]="i">
+                <div class="row">
+                    <div class="col-12">
+                        <button type="button" mat-fab class="btn-operation float-right btn-sm" (click)="addEducation()">
+                            +
+                        </button>
+                        <button type="button" mat-fab class="btn-operation float-right btn-sm mr-2"
+                            (click)="removeEducation(i)"> - </button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-4">
+                        <div class="form-field">
+                            <div class="form-field-control">
+                                <input id="education" type="text" formControlName="education" class="form-field-input"
+                                    placeholder=" ">
+                                <label for="education" class="form-field-label">Study</label>
+                                <div class="form-field-bar"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="form-field">
+                            <div class="form-field-control">
+                                <input id="institution" type="text" formControlName="institution"
+                                    class="form-field-input" placeholder=" ">
+                                <label for="institution" class="form-field-label">institution/Place of Education</label>
+                                <div class="form-field-bar"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="form-field">
+                            <div class="form-field-control">
+                                <input id="city" type="text" formControlName="city" class="form-field-input"
+                                    placeholder=" ">
+                                <label for="city" class="form-field-label">City/Country</label>
+                                <div class="form-field-bar"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-4">
-                    <div class="form-field">
-                        <div class="form-field-control">
-                            <input id="institution" type="text" formControlName="institution" class="form-field-input"
-                                placeholder=" ">
-                            <label for="institution" class="form-field-label">institution/Place of Education</label>
-                            <div class="form-field-bar"></div>
+                <div class="row">
+                    <div class="col-2">
+                        <div class="form-field">
+                            <div class="form-field-control">
+                                <input id="joinedDate2" type="text" formControlName="joinedDate"
+                                    class="form-field-input" placeholder=" ">
+                                <label for="joinedDate2" class="form-field-label">Joined Date</label>
+                                <div class="form-field-bar"></div>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-4">
-                    <div class="form-field">
-                        <div class="form-field-control">
-                            <input id="city" type="text" formControlName="city" class="form-field-input"
-                                placeholder=" ">
-                            <label for="city" class="form-field-label">City/Country</label>
-                            <div class="form-field-bar"></div>
+                    <div class="col-2">
+                        <div class="form-field">
+                            <div class="form-field-control">
+                                <input id="leftDate2" type="text" formControlName="leftDate" class="form-field-input"
+                                    placeholder=" ">
+                                <label for="leftDate2" class="form-field-label">Left Date
+                                    <mat-icon matTooltip="If you still working then write Present"
+                                        class="info-icn">info</mat-icon>
+                                </label>
+                                <div class="form-field-bar"></div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-2">
-                    <div class="form-field">
-                        <div class="form-field-control">
-                            <input id="joinedDate2" type="text" formControlName="joinedDate" class="form-field-input"
-                                placeholder=" ">
-                            <label for="joinedDate2" class="form-field-label">Joined Date</label>
-                            <div class="form-field-bar"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-2">
-                    <div class="form-field">
-                        <div class="form-field-control">
-                            <input id="leftDate2" type="text" formControlName="leftDate" class="form-field-input"
-                                placeholder=" ">
-                            <label for="leftDate2" class="form-field-label">Left Date
-                                <mat-icon matTooltip="If you still working then write Present"
-                                    class="info-icn">info</mat-icon>
-                            </label>
-                            <div class="form-field-bar"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-8">
-                    <div class="form-field">
-                        <div class="form-field-control">
-                            <!-- <input id="course" type="text" formControlName="course" class="form-field-input"
+                    <div class="col-8">
+                        <div class="form-field">
+                            <div class="form-field-control">
+                                <!-- <input id="course" type="text" formControlName="course" class="form-field-input"
                                 placeholder=" "> -->
-                            <tag-input id="course" [modelAsStrings]="true" formControlName="course"
-                                [placeholder]="'+ Course/Projects' " [allowDupes]="false"
-                                [secondaryPlaceholder]="'Type Course & Enter'">
-                            </tag-input>
-                            <!-- <label for="course" class="form-field-label">Course/Projects</label> -->
-                            <div class="form-field-bar"></div>
+                                <tag-input id="course" [modelAsStrings]="true" formControlName="course"
+                                    [placeholder]="'+ Course/Projects' " [allowDupes]="false"
+                                    [secondaryPlaceholder]="'Type Course & Enter'">
+                                </tag-input>
+                                <!-- <label for="course" class="form-field-label">Course/Projects</label> -->
+                                <div class="form-field-bar"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </form>
-        <div class="example-button-container float-right">
-            <button mat-fab class="btn-navigate mr-2" matStepperPrevious>
-                <mat-icon>navigate_before</mat-icon>
-            </button>
-            <button mat-fab class="btn-navigate" matStepperNext>
-                <mat-icon>navigate_next</mat-icon>
-            </button>
-        </div>
-    </mat-step>
+            <div class="example-button-container float-right">
+                <button type="button" mat-fab class="btn-navigate mr-2" matStepperPrevious>
+                    <mat-icon>navigate_before</mat-icon>
+                </button>
+                <button type="button" mat-fab class="btn-navigate" matStepperNext>
+                    <mat-icon>navigate_next</mat-icon>
+                </button>
+            </div>
+        </mat-step>
 
-    <mat-step>
-        <ng-template matStepLabel>
-            <span class="title"> Projects </span>
-        </ng-template>
-        <form [formGroup]="forthFormGroup">
-            <div class="row">
-                <div class="col-4">
-                    <div class="form-field">
-                        <div class="form-field-control">
-                            <input id="projectName" type="text" formControlName="projectName" class="form-field-input"
-                                placeholder=" ">
-                            <label for="projectName" class="form-field-label">Project Name</label>
-                            <div class="form-field-bar"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-2">
-                    <div class="form-field">
-                        <div class="form-field-control">
-                            <input id="startDate" type="text" formControlName="startDate" class="form-field-input"
-                                placeholder=" ">
-                            <label for="startDate" class="form-field-label">Start Date</label>
-                            <div class="form-field-bar"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-2">
-                    <div class="form-field">
-                        <div class="form-field-control">
-                            <input id="endDate" type="text" formControlName="endDate" class="form-field-input"
-                                placeholder=" ">
-                            <label for="endDate" class="form-field-label">End Date
-                                <mat-icon matTooltip="If you still working then write Running"
-                                    class="info-icn">info</mat-icon>
-                            </label>
-                            <div class="form-field-bar"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-12">
-                    <div class="form-field">
-                        <div class="form-field-control">
-                            <textarea id="projectDetails" type="text" formControlName="projectDetails"
-                                class="form-field-input text-resize" placeholder=" " rows="2"></textarea>
-                            <label for="projectDetails" class="form-field-label">Brief details about Project</label>
-                            <div class="form-field-bar"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </form>
-        <div class="example-button-container float-right">
-            <button mat-fab class="btn-navigate mr-2" matStepperPrevious>
-                <mat-icon>navigate_before</mat-icon>
-            </button>
-            <button mat-fab class="btn-navigate" matStepperNext>
-                <mat-icon>navigate_next</mat-icon>
-            </button>
-        </div>
-    </mat-step>
+        <mat-step formArrayName="projectDetails">
+            <ng-template matStepLabel>
+                <span class="title"> Projects </span>
+            </ng-template>
 
-    <mat-step>
-        <ng-template matStepLabel>
-            <span class="title"> Other Details </span>
-        </ng-template>
-        <form [formGroup]="fifthFormGroup">
-            <div class="row">
-                <div class="col-12">
-                    <div class="form-field">
-                        <div class="form-field-control">
-                            <tag-input id="skills" [modelAsStrings]="true" formControlName="skills"
-                                [placeholder]="'+ Skills (press Enter)' " [allowDupes]="false"
-                                [secondaryPlaceholder]="'Type Skills & Enter'">
-                            </tag-input>
-                            <div class="form-field-bar"></div>
+            <div *ngFor="let data of ProjectDetails.controls; let i = index" [formGroupName]="i">
+                <div class="row">
+                    <div class="col-12">
+                        <button type="button" mat-fab class="btn-operation float-right btn-sm" (click)="addProject()"> +
+                        </button>
+                        <button type="button" mat-fab class="btn-operation float-right btn-sm mr-2"
+                            (click)="removeProject(i)"> - </button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-4">
+                        <div class="form-field">
+                            <div class="form-field-control">
+                                <input id="projectName{{i}}" type="text" formControlName="projectName"
+                                    class="form-field-input" placeholder=" ">
+                                <label for="projectName" class="form-field-label">Project Name</label>
+                                <div class="form-field-bar"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="form-field">
+                            <div class="form-field-control">
+                                <input id="startDate{{i}}" type="text" formControlName="startDate"
+                                    class="form-field-input" placeholder=" ">
+                                <label for="startDate" class="form-field-label">Start Date</label>
+                                <div class="form-field-bar"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="form-field">
+                            <div class="form-field-control">
+                                <input id="endDate{{i}}" type="text" formControlName="endDate" class="form-field-input"
+                                    placeholder=" ">
+                                <label for="endDate" class="form-field-label">End Date
+                                    <mat-icon matTooltip="If you still working then write Running"
+                                        class="info-icn">info</mat-icon>
+                                </label>
+                                <div class="form-field-bar"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-field">
+                            <div class="form-field-control">
+                                <textarea id="projectDetails{{i}}" type="text" formControlName="projectDetails"
+                                    class="form-field-input text-resize" placeholder=" " rows="2"></textarea>
+                                <label for="projectDetails" class="form-field-label">Brief details about
+                                    Project</label>
+                                <div class="form-field-bar"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-12">
-                    <div class="form-field">
-                        <div class="form-field-control">
-                            <tag-input id="softSkills" [modelAsStrings]="true" formControlName="softSkills"
-                                [placeholder]="'+ Soft Skills (press Enter)' " [allowDupes]="false"
-                                [secondaryPlaceholder]="'Type Soft Skills & Enter'">
-                            </tag-input>
-                            <div class="form-field-bar"></div>
+            <div class="example-button-container float-right">
+                <button type="button" mat-fab class="btn-navigate mr-2" matStepperPrevious>
+                    <mat-icon>navigate_before</mat-icon>
+                </button>
+                <button type="button" mat-fab class="btn-navigate" matStepperNext>
+                    <mat-icon>navigate_next</mat-icon>
+                </button>
+            </div>
+        </mat-step>
+
+        <mat-step>
+            <ng-template matStepLabel>
+                <span class="title"> Other Details </span>
+            </ng-template>
+            <div formGroupName="otherDetails">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-field">
+                            <div class="form-field-control">
+                                <tag-input id="skills" [modelAsStrings]="true" formControlName="skills"
+                                    [placeholder]="'+ Skills (press Enter)' " [allowDupes]="false"
+                                    [secondaryPlaceholder]="'Type Skills & Enter'">
+                                </tag-input>
+                                <div class="form-field-bar"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-12">
-                    <div class="form-field">
-                        <div class="form-field-control">
-                            <tag-input id="interest" [modelAsStrings]="true" formControlName="interest"
-                                [placeholder]="'+ Interest (press Enter)' " [allowDupes]="false"
-                                [secondaryPlaceholder]="'Type Interest & Enter'">
-                            </tag-input>
-                            <div class="form-field-bar"></div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-field">
+                            <div class="form-field-control">
+                                <tag-input id="softSkills" [modelAsStrings]="true" formControlName="softSkills"
+                                    [placeholder]="'+ Soft Skills (press Enter)' " [allowDupes]="false"
+                                    [secondaryPlaceholder]="'Type Soft Skills & Enter'">
+                                </tag-input>
+                                <div class="form-field-bar"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-12">
-                    <div class="form-field">
-                        <div class="form-field-control">
-                            <tag-input id="language" [modelAsStrings]="true" formControlName="Language"
-                                [placeholder]="'+ Language (press Enter)' " [allowDupes]="false"
-                                [secondaryPlaceholder]="'Type Language & Enter'">
-                            </tag-input>
-                            <div class="form-field-bar"></div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-field">
+                            <div class="form-field-control">
+                                <tag-input id="interest" [modelAsStrings]="true" formControlName="interest"
+                                    [placeholder]="'+ Interest (press Enter)' " [allowDupes]="false"
+                                    [secondaryPlaceholder]="'Type Interest & Enter'">
+                                </tag-input>
+                                <div class="form-field-bar"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-field">
+                            <div class="form-field-control">
+                                <tag-input id="language" [modelAsStrings]="true" formControlName="language"
+                                    [placeholder]="'+ Language (press Enter)' " [allowDupes]="false"
+                                    [secondaryPlaceholder]="'Type Language & Enter'">
+                                </tag-input>
+                                <div class="form-field-bar"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="row">
-                <div class="col-4">
-                    <div class="form-field">
-                        <div class="form-field-control">
-                            <input id="certificateNames" type="text" formControlName="certificateNames" class="form-field-input"
-                                placeholder=" ">
-                            <label for="certificateNames" class="form-field-label">Certificate Name</label>
-                            <div class="form-field-bar"></div>
+            <div formArrayName="certificates">
+                <div *ngFor="let data of CertificateDetails.controls; let i = index" [formGroupName]="i">
+                    <div class="row">
+                        <div class="col-12">
+                            <button type="button" mat-fab class="btn-operation float-right btn-sm"
+                                (click)="addCertificate()"> +
+                            </button>
+                            <button type="button" mat-fab class="btn-operation float-right btn-sm mr-2"
+                                (click)="removeCertificate(i)"> - </button>
                         </div>
                     </div>
-                </div>
-                <div class="col-2">
-                    <div class="form-field">
-                        <div class="form-field-control">
-                            <input id="certificateStartDate" type="text" formControlName="certificateStartDate" class="form-field-input"
-                                placeholder=" ">
-                            <label for="certificateStartDate" class="form-field-label">Start Date</label>
-                            <div class="form-field-bar"></div>
+                    <div class="row">
+                        <div class="col-4">
+                            <div class="form-field">
+                                <div class="form-field-control">
+                                    <input id="certificateNames" type="text" formControlName="certificateNames"
+                                        class="form-field-input" placeholder=" ">
+                                    <label for="certificateNames" class="form-field-label">Certificate Name</label>
+                                    <div class="form-field-bar"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <div class="form-field">
+                                <div class="form-field-control">
+                                    <input id="certificateStartDate" type="text" formControlName="certificateStartDate"
+                                        class="form-field-input" placeholder=" ">
+                                    <label for="certificateStartDate" class="form-field-label">Start Date</label>
+                                    <div class="form-field-bar"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <div class="form-field">
+                                <div class="form-field-control">
+                                    <input id="certificateEndDate" type="text" formControlName="certificateEndDate"
+                                        class="form-field-input" placeholder=" ">
+                                    <label for="certificateEndDate" class="form-field-label">End Date
+                                        <mat-icon matTooltip="If you still working then write Running"
+                                            class="info-icn">info</mat-icon>
+                                    </label>
+                                    <div class="form-field-bar"></div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-2">
-                    <div class="form-field">
-                        <div class="form-field-control">
-                            <input id="certificateEndDate" type="text" formControlName="certificateEndDate" class="form-field-input"
-                                placeholder=" ">
-                            <label for="certificateEndDate" class="form-field-label">End Date
-                                <mat-icon matTooltip="If you still working then write Running"
-                                    class="info-icn">info</mat-icon>
-                            </label>
-                            <div class="form-field-bar"></div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="form-field">
+                                <div class="form-field-control">
+                                    <textarea id="certificateDetails" type="text" formControlName="certificateDetails"
+                                        class="form-field-input text-resize" placeholder=" " rows="2"></textarea>
+                                    <label for="certificateDetails" class="form-field-label">Brief details about
+                                        Certificate</label>
+                                    <div class="form-field-bar"></div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-12">
-                    <div class="form-field">
-                        <div class="form-field-control">
-                            <textarea id="certificateDetails" type="text" formControlName="certificateDetails"
-                                class="form-field-input text-resize" placeholder=" " rows="2"></textarea>
-                            <label for="certificateDetails" class="form-field-label">Brief details about Certificate</label>
-                            <div class="form-field-bar"></div>
-                        </div>
-                    </div>
-                </div>
+            <div class="example-button-container float-right">
+                <button type="button" mat-fab class="btn-navigate mr-2" matStepperPrevious>
+                    <mat-icon>navigate_before</mat-icon>
+                </button>
             </div>
-        </form>
-        <div class="example-button-container float-right">
-            <button mat-fab class="btn-navigate mr-2" matStepperPrevious>
-                <mat-icon>navigate_before</mat-icon>
-            </button>
-        </div>
-    </mat-step>
+        </mat-step>
+    </form>
 </mat-stepper>

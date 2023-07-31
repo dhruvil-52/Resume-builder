@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-home',
@@ -7,79 +7,220 @@ import { FormBuilder, FormGroup } from '@angular/forms';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  firstFormGroup: FormGroup;
-  secondFormGroup: FormGroup;
-  thirdFormGroup: FormGroup;
-  forthFormGroup: FormGroup;
-  fifthFormGroup: FormGroup;
+  formDetails: FormGroup;
 
   constructor(private fb: FormBuilder) { }
 
   initForm() {
-    this.firstFormGroup = this.fb.group({
-      firstName: '',
-      lastName: '',
-      designation: '',
-      aboutYourSelf: '',
+    this.formDetails = this.fb.group({
+      personalDetails: this.fb.group({
+        firstName: '',
+        lastName: '',
+        designation: '',
+        aboutYourSelf: '',
 
-      email: '',
-      phone: '',
-      city: '',
-      state: '',
-      country: '',
+        email: '',
+        phone: '',
+        city: '',
+        state: '',
+        country: '',
 
-      facebook: '',
-      instagram: '',
-      twitter: '',
-      quora: '',
+        facebook: '',
+        instagram: '',
+        twitter: '',
+        quora: '',
 
-      skype: '',
-      linkedIn: '',
-      gitHub: '',
-      stackOverflow: '',
-      webSite: ''
+        skype: '',
+        linkedIn: '',
+        gitHub: '',
+        stackOverflow: '',
+        webSite: ''
+      }),
+
+      experienceDetails: this.fb.array([
+        this.fb.group({
+          position: '',
+          company: '',
+          city: '',
+
+          joinedDate: '',
+          leftDate: '',
+          companyDescription: '',
+          rolesAndResponsibility: '',
+          achievements: ''
+        })
+      ]),
+
+      educationDetails: this.fb.array([
+        this.fb.group({
+          education: '',
+          institution: '',
+          city: '',
+
+          joinedDate: '',
+          leftDate: '',
+          course: ''
+        })
+      ]),
+
+      projectDetails: this.fb.array([
+        this.fb.group({
+          projectName: '',
+          startDate: '',
+          endDate: '',
+          projectDetails: ''
+        })
+      ]),
+
+      otherDetails: this.fb.group({
+        skills: '',
+        softSkills: '',
+        interest: '',
+        language: ''
+      }),
+
+      certificates: this.fb.array([
+        this.fb.group({
+          certificateNames: '',
+          certificateStartDate: '',
+          certificateEndDate: '',
+          certificateDetails: ''
+        })
+      ])
     })
+  }
 
-    this.secondFormGroup = this.fb.group({
-      position: '',
-      company: '',
-      city: '',
+  get CertificateDetails() {
+    return this.formDetails.get('certificates') as FormArray;
+  }
+  addCertificate() {
+    let control = <FormArray>this.formDetails.controls['certificates'];
+    control.push(
+      this.fb.group({
+        certificateNames: '',
+        certificateStartDate: '',
+        certificateEndDate: '',
+        certificateDetails: ''
+      })
+    )
+  }
+  removeCertificate(index: number) {
+    let control = <FormArray>this.formDetails.controls['certificates'];
+    control.removeAt(index)
+    if (control.length == 0) {
+      control.push(
+        this.fb.group({
+          certificateNames: '',
+          certificateStartDate: '',
+          certificateEndDate: '',
+          certificateDetails: ''
+        })
+      )
+    }
+  }
 
-      joinedDate: '',
-      leftDate: '',
-      companyDescription: '',
-      rolesAndResponsibility: '',
-      achievements: ''
-    })
+  get ExperienceDetails() {
+    return this.formDetails.get('experienceDetails') as FormArray;
+  }
+  addExperience() {
+    let control = <FormArray>this.formDetails.controls['experienceDetails'];
+    control.push(
+      this.fb.group({
+        position: '',
+        company: '',
+        city: '',
 
-    this.thirdFormGroup = this.fb.group({
-      education: '',
-      institution: '',
-      city: '',
+        joinedDate: '',
+        leftDate: '',
+        companyDescription: '',
+        rolesAndResponsibility: '',
+        achievements: ''
+      })
+    )
+  }
+  removeExperience(index: number) {
+    let control = <FormArray>this.formDetails.controls['experienceDetails'];
+    control.removeAt(index)
+    if (control.length == 0) {
+      control.push(
+        this.fb.group({
+          position: '',
+          company: '',
+          city: '',
 
-      joinedDate: '',
-      leftDate: '',
-      course: ''
-    })
+          joinedDate: '',
+          leftDate: '',
+          companyDescription: '',
+          rolesAndResponsibility: '',
+          achievements: ''
+        })
+      )
+    }
+  }
 
-    this.forthFormGroup = this.fb.group({
-      projectName: '',
-      startDate: '',
-      endDate: '',
-      projectDetails: ''
-    })
+  get EducationDetails() {
+    return this.formDetails.get('educationDetails') as FormArray;
+  }
+  addEducation() {
+    let control = <FormArray>this.formDetails.controls['educationDetails'];
+    control.push(
+      this.fb.group({
+        education: '',
+        institution: '',
+        city: '',
 
-    this.fifthFormGroup = this.fb.group({
-      skills: '',
-      softSkills: '',
-      interest: '',
-      language: '',
+        joinedDate: '',
+        leftDate: '',
+        course: ''
+      })
+    )
+  }
+  removeEducation(index: number) {
+    let control = <FormArray>this.formDetails.controls['educationDetails'];
+    control.removeAt(index)
+    if (control.length == 0) {
+      control.push(
+        this.fb.group({
+          education: '',
+          institution: '',
+          city: '',
 
-      certificateNames: '',
-      certificateStartDate: '',
-      certificateEndDate: '',
-      certificateDetails: ''
-    })
+          joinedDate: '',
+          leftDate: '',
+          course: ''
+        })
+      )
+    }
+  }
+
+
+  get ProjectDetails() {
+    return this.formDetails.get('projectDetails') as FormArray;
+  }
+  addProject() {
+    let control = <FormArray>this.formDetails.controls['projectDetails'];
+    control.push(
+      this.fb.group({
+        projectName: '',
+        startDate: '',
+        endDate: '',
+        projectDetails: ''
+      })
+    )
+  }
+  removeProject(index: number) {
+    let control = <FormArray>this.formDetails.controls['projectDetails'];
+    control.removeAt(index)
+    if (control.length == 0) {
+      control.push(
+        this.fb.group({
+          projectName: '',
+          startDate: '',
+          endDate: '',
+          projectDetails: ''
+        })
+      )
+    }
   }
 
 
