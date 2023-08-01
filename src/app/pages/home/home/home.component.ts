@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { GenerateResumeService } from 'src/app/shared/services/generate-resume.service';
 
 @Component({
   selector: 'app-home',
@@ -9,7 +10,8 @@ import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 export class HomeComponent implements OnInit {
   formDetails: FormGroup;
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder,
+    private resumeBuilderService: GenerateResumeService) { }
 
   initForm() {
     this.formDetails = this.fb.group({
@@ -237,6 +239,7 @@ export class HomeComponent implements OnInit {
 
   viewResult() {
     console.log("form", JSON.stringify(this.formDetails.value))
+    this.resumeBuilderService.generateResume(this.formDetails.value)
   }
 
   ngOnInit(): void {
