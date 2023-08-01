@@ -23,9 +23,7 @@ export class HomeComponent implements OnInit {
 
         email: '',
         phone: '',
-        city: '',
-        state: '',
-        country: '',
+        location: '',
 
         facebook: '',
         instagram: '',
@@ -49,7 +47,7 @@ export class HomeComponent implements OnInit {
           leftDate: '',
           companyDescription: '',
           rolesAndResponsibility: '',
-          achievements: ''
+          projects: ''
         })
       ]),
 
@@ -57,7 +55,7 @@ export class HomeComponent implements OnInit {
         this.fb.group({
           education: '',
           institution: '',
-          city: '',
+          // city: '',
 
           joinedDate: '',
           leftDate: '',
@@ -140,7 +138,7 @@ export class HomeComponent implements OnInit {
         leftDate: '',
         companyDescription: '',
         rolesAndResponsibility: '',
-        achievements: ''
+        projects: ''
       })
     )
   }
@@ -158,7 +156,7 @@ export class HomeComponent implements OnInit {
           leftDate: '',
           companyDescription: '',
           rolesAndResponsibility: '',
-          achievements: ''
+          projects: ''
         })
       )
     }

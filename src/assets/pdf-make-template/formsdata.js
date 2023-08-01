@@ -6,9 +6,7 @@ let data = {
         "aboutYourSelf": "As a back-end developer want to be the backbone of a software and as a front-end developer want to be the face of a software.",
         "email": "dhruviltalaviya1211@gmail.com",
         "phone": "8460723353",
-        "city": "ahmedabad",
-        "state": "Gujarat",
-        "country": "India",
+        "location": "ahmedabad,Gujarat,India",
         "facebook": "https://www.facebook.com/dhruvil.talaviya.1/",
         "instagram": "https://www.instagram.com/i_mohil_/",
         "twitter": "https://www.instagram.com/i_mohil_/",
@@ -26,8 +24,8 @@ let data = {
         "joinedDate": "07/2022",
         "leftDate": "Present",
         "companyDescription": "BUILDESK help Real Estate developers and brokers to accelerate sales closures,manage their pipelines,and track ROI accurately using our platform with the help of deeply integrated conversational analytical solutions.",
-        "rolesAndResponsibility": "Maintain ,Upgrade and Testing Projects.Get feedback and requirements from,and build solutions and modules for customers",
-        "achievements": ["CRM (Customer Relationship Management)",
+        "rolesAndResponsibility": "Maintain, Upgrade, and Testing Projects. Get feedback and requirements from customers, and build solutions and modules according to them.",
+        "projects": ["CRM (Customer Relationship Management)",
             "ERP (Enterprise Resource Planning)"]
     },
     {
@@ -37,7 +35,7 @@ let data = {
         "joinedDate": "04/2021",
         "leftDate": "07/2022",
         "companyDescription": "Inventyv delivers a web-based professional tax product – MyTAXPrepOffice,for CPAs and Tax Preparers in USA.",
-        "rolesAndResponsibility": "After I had finished my Internship,I am a part of the CRM team.And my main roles are handling,maintaining,and developing CRM as a full stack developer(in Angular & Node js).",
+        "rolesAndResponsibility": "After I had finished my Internship, I am a part of the CRM team. And my main roles are handling, maintaining, and developing CRM as a full stack developer(in Angular & Node js).",
         "achievements": ["CRM (Customer Relationship Management)"]
     },
     {
@@ -52,8 +50,7 @@ let data = {
     }],
     "educationDetails": [{
         "education": "BACHELOR OF ENGINEERING",
-        "institution": "Government Engineering College",
-        "city": "Gandhinagar",
+        "institution": "Government Engineering College,Gandhinagar",
         "joinedDate": "2017",
         "leftDate": "2021",
         "course": ["Information Technology"],
@@ -62,8 +59,7 @@ let data = {
     },
     {
         "education": "Higher Secondary School (HSC)",
-        "institution": "Sarswati Vidhyamandir",
-        "city": "Ahmedabad,Gujarat",
+        "institution": "Sarswati Vidhyamandir,Ahmedabad",
         "joinedDate": "2015",
         "leftDate": "2017",
         "course": "",
@@ -72,8 +68,7 @@ let data = {
     },
     {
         "education": "Secondary School (SSC)",
-        "institution": "Sarswati Vidhyamandir",
-        "city": "Ahmedabad,Gujarat",
+        "institution": "Sarswati Vidhyamandir,Ahmedabad",
         "joinedDate": "2015",
         "leftDate": "",
         "course": "",
@@ -109,7 +104,8 @@ let data = {
         "projectCodeLink": "https://github.com/dhruvil-52/Resume-builder"
     }],
     "otherDetails": {
-        "skills": ["Angular",
+        "skills": [
+            "Angular",
             "Html",
             "Css",
             "Java Script",
@@ -117,20 +113,27 @@ let data = {
             "Expressjs",
             "Couchbase",
             "Minio",
-            "Elastic search"],
-        "softSkills": ["Team Work",
+            "Elastic search"
+        ],
+        "softSkills": [
+            "Team Work",
             "Punctuality",
             "Good In Management",
             "studiousness",
             "self learner",
-            "Hard Woking"],
-        "interest": ["Full stack",
+            "Hard Woking"
+        ],
+        "interest": [
+            "Full stack",
             "Mean stack",
             "Angular",
-            "Nodejs"],
-        "language": ["Gujarati",
+            "Nodejs"
+        ],
+        "language": [
+            "Gujarati",
             "Hindi",
-            "English"]
+            "English"
+        ]
     },
     "certificates": [{
         "certificateNames": "Volunteer (2019)",

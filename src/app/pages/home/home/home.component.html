@@ -81,34 +81,12 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
                         <div class="col-4">
                             <div class="form-field">
                                 <div class="form-field-control">
-                                    <input id="city" type="text" formControlName="city" class="form-field-input"
+                                    <input id="location" type="text" formControlName="location" class="form-field-input"
                                         placeholder=" ">
-                                    <label for="city" class="form-field-label">City</label>
-                                    <div class="form-field-bar"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-4">
-                            <div class="form-field">
-                                <div class="form-field-control">
-                                    <input id="state" type="text" formControlName="state" class="form-field-input"
-                                        placeholder=" ">
-                                    <label for="state" class="form-field-label">State</label>
-                                    <div class="form-field-bar"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-4">
-                            <div class="form-field">
-                                <div class="form-field-control">
-                                    <input id="country" type="text" formControlName="country" class="form-field-input"
-                                        placeholder=" ">
-                                    <label for="country" class="form-field-label">Country</label>
+                                    <label for="location" class="form-field-label">Location</label>
                                     <div class="form-field-bar"></div>
                                 </div>
                             </div>
@@ -307,13 +285,13 @@
                     <div class="col-8">
                         <div class="form-field">
                             <div class="form-field-control">
-                                <!-- <input id="achievements" type="text" formControlName="achievements" class="form-field-input"
+                                <!-- <input id="projects" type="text" formControlName="projects" class="form-field-input"
                                 placeholder=" "> -->
-                                <tag-input id="achievements" [modelAsStrings]="true" formControlName="achievements"
-                                    [placeholder]="'+ Achievements' " [allowDupes]="false"
-                                    [secondaryPlaceholder]="'Type Achievements & Enter'">
+                                <tag-input id="projects" [modelAsStrings]="true" formControlName="projects"
+                                    [placeholder]="'+ projects' " [allowDupes]="false"
+                                    [secondaryPlaceholder]="'Type projects & Enter'">
                                 </tag-input>
-                                <!-- <label for="achievements" class="form-field-label">Achievements/Tasks</label> -->
+                                <!-- <label for="projects" class="form-field-label">projects/Tasks</label> -->
                                 <div class="form-field-bar"></div>
                             </div>
                         </div>
@@ -390,7 +368,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-4">
+                    <!-- <div class="col-4">
                         <div class="form-field">
                             <div class="form-field-control">
                                 <input id="city" type="text" formControlName="city" class="form-field-input"
@@ -399,9 +377,7 @@
                                 <div class="form-field-bar"></div>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="row">
+                    </div> -->
                     <div class="col-2">
                         <div class="form-field">
                             <div class="form-field-control">
@@ -425,6 +401,8 @@
                             </div>
                         </div>
                     </div>
+                </div>
+                <div class="row">
                     <div class="col-2">
                         <div class="form-field">
                             <div class="form-field-control">
@@ -448,7 +426,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-4">
+                    <div class="col-8">
                         <div class="form-field">
                             <div class="form-field-control">
                                 <!-- <input id="course" type="text" formControlName="course" class="form-field-input"
