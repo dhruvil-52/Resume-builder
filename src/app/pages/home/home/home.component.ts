@@ -59,7 +59,10 @@ export class HomeComponent implements OnInit {
 
           joinedDate: '',
           leftDate: '',
-          course: ''
+          course: '',
+
+          resultType: '',
+          resultValue: ''
         })
       ]),
 
@@ -68,7 +71,8 @@ export class HomeComponent implements OnInit {
           projectName: '',
           startDate: '',
           endDate: '',
-          projectDetails: ''
+          projectDetails: '',
+          projectCodeLink: ''
         })
       ]),
 
@@ -171,7 +175,10 @@ export class HomeComponent implements OnInit {
 
         joinedDate: '',
         leftDate: '',
-        course: ''
+        course: '',
+
+        resultType: '',
+        resultValue: ''
       })
     )
   }
@@ -187,7 +194,10 @@ export class HomeComponent implements OnInit {
 
           joinedDate: '',
           leftDate: '',
-          course: ''
+          course: '',
+
+          resultType: '',
+          resultValue: ''
         })
       )
     }
@@ -204,7 +214,8 @@ export class HomeComponent implements OnInit {
         projectName: '',
         startDate: '',
         endDate: '',
-        projectDetails: ''
+        projectDetails: '',
+        projectCodeLink: ''
       })
     )
   }
@@ -217,14 +228,15 @@ export class HomeComponent implements OnInit {
           projectName: '',
           startDate: '',
           endDate: '',
-          projectDetails: ''
+          projectDetails: '',
+          projectCodeLink: ''
         })
       )
     }
   }
 
   viewResult() {
-
+    console.log("form", JSON.stringify(this.formDetails.value))
   }
 
   ngOnInit(): void {
