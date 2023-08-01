@@ -28,6 +28,17 @@ export class GenerateResumeService {
       "content": [
         personalDetails,
         {
+          canvas:
+            [
+              {
+                type: 'line',
+                x1: 0, y1: 0,
+                x2: 530, y2: 0,
+                lineWidth: 0.2
+              },
+            ]
+        },
+        {
           "columns": [
             {
               "stack": [
@@ -122,7 +133,6 @@ export class GenerateResumeService {
                   ]
                 },
                 softSkills
-
               ]
             }
           ]
@@ -136,6 +146,7 @@ export class GenerateResumeService {
         "subheader": {
           "bold": true,
           "fontSize": 13,
+          "color": "#005074",
           "margin": [
             0,
             10,
@@ -189,24 +200,19 @@ export class GenerateResumeService {
         "rightItalicInfo": {
           italics: true,
           "color": "#aaaaab",
-          "alignment": "right",
-          "margin": [
-            0,
-            0,
-            20,
-            0
-          ]
+          "alignment": "right"
         }
       },
       "defaultStyle": {
         "columnGap": 15,
-        "fontSize": 7
+        "lineHeight": 1.2,
+        "fontSize": 9
       }
     }
 
     let finalResponse = {
       info: {
-        title: data.personalDetails.firstName + '_' + data.personalDetails.lastName + "'s Resume"
+        title: this.titleCase.transform(data.personalDetails.firstName + '_' + data.personalDetails.lastName) + "'s Resume"
       },
       ...pdfData
     }
@@ -238,7 +244,7 @@ export class GenerateResumeService {
           "columns": [
             {
               "text": `${this.titleCase.transform(data.personalDetails.designation)}`,
-              "color": "#aaaaab",
+              "color": "#005074",
               "style": "subtitle",
               "width": 300
             }
@@ -635,7 +641,6 @@ export class GenerateResumeService {
   getExperienceDetails(data: any) {
     let experienceDetails: any = []
     data.experienceDetails.forEach((experience: any) => {
-
       let experienceStack = []
       if (experience.position) {
         experienceStack.push({
@@ -665,11 +670,13 @@ export class GenerateResumeService {
           "columns": [
             {
               "text": `${experience.joinedDate} - ${experience.leftDate}`,
-              "style": "italicInfo"
+              "style": "italicInfo",
+              "width": 150
             },
             {
               "text": `${experience.city}`,
-              "style": "rightItalicInfo"
+              "style": "rightItalicInfo",
+              "width": 130
             }
           ]
         })
@@ -713,7 +720,7 @@ export class GenerateResumeService {
           ul: projectArray
         })
       }
-      if (experience.companyDescription) {
+      if (experience.rolesAndResponsibility) {
         experienceStack.push({
           "columns": [
             {
@@ -785,11 +792,13 @@ export class GenerateResumeService {
           "columns": [
             {
               "text": `${education.joinedDate} - ${education.leftDate}`,
-              "style": "italicInfo"
+              "style": "italicInfo",
+              "width": 150
             },
             {
               "text": `${education.resultType} : ${education.resultValue}`,
-              "style": "rightItalicInfo"
+              "style": "rightItalicInfo",
+              "width": 130
             }
           ]
         })
@@ -799,7 +808,7 @@ export class GenerateResumeService {
         experienceStack.push({
           "columns": [
             {
-              "text": "Projects",
+              "text": "Course",
               "style": "italicInfo",
               "width": 300
             },
