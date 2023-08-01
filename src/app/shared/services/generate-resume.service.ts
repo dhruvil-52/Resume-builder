@@ -205,7 +205,7 @@ export class GenerateResumeService {
       },
       "defaultStyle": {
         "columnGap": 15,
-        "lineHeight": 1.2,
+        "lineHeight": 1.1,
         "fontSize": 9
       }
     }
@@ -686,6 +686,7 @@ export class GenerateResumeService {
           "columns": [
             {
               "text": `${experience.companyDescription}`,
+              "alignment": "justify",
               "width": 300
             },
           ]
@@ -735,6 +736,7 @@ export class GenerateResumeService {
             {
               "text": `${experience.rolesAndResponsibility}`,
               "width": 300,
+              "alignment": "justify",
               "style": "info"
             }
           ]
@@ -882,7 +884,7 @@ export class GenerateResumeService {
           "columns": [
             {
               "text": `${project.projectDetails}`,
-              "alignment": "left",
+              "alignment": "justify",
               "width": 200,
               "style": "info"
             }
@@ -939,7 +941,7 @@ export class GenerateResumeService {
           "columns": [
             {
               "text": `${certificate.certificateDetails}`,
-              "alignment": "left",
+              "alignment": "justify",
               "width": 200,
               "style": "info"
             }
@@ -985,7 +987,6 @@ export class GenerateResumeService {
       return {}
     }
   }
-
   getSoftSkills(data: any) {
     if (data.otherDetails && data.otherDetails.softSkills) {
       let softSkills = "";
@@ -1026,7 +1027,7 @@ export class GenerateResumeService {
         "columns": [
           {
             "text": data.otherDetails.language.toString(),
-            "style": "title",
+            "style": "boldinfo",
             "width": 200
           }
         ]
