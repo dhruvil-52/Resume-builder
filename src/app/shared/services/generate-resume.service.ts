@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
+import { TitleCasePipe, UpperCasePipe } from '@angular/common';
+import * as _ from 'lodash';
+import { pdfMakeDefaultStyles, pdfMakeStyles } from '../models/pdfmake-default-settings';
 import * as pdfMake from "pdfmake/build/pdfmake";
 import * as pdfFonts from 'pdfmake/build/vfs_fonts';
-import { TitleCasePipe, UpperCasePipe } from '@angular/common';
-
 (pdfMake as any).vfs = pdfFonts.pdfMake.vfs;
 
 @Injectable()
@@ -13,16 +14,18 @@ export class GenerateResumeService {
   constructor(private titleCase: TitleCasePipe, private uppercase: UpperCasePipe) { }
 
   generateResume(data: any) {
+    let bodyStack1: Array<any> = [];
+    let bodyStack2: Array<any> = [];
 
     let personalDetails = this.getPersonalDetails(data)
-    let experienceDetails = this.getExperienceDetails(data)
-    let educationDetails = this.getEducationDetails(data)
-    let skills = this.getSkills(data)
-    let projectDetails = this.getProjectDetails(data)
-    let certificateDetails = this.getCertificatesDetails(data)
-    let language = this.getLanguage(data)
-    let softSkills = this.getSoftSkills(data)
-    let interest = this.getInterest(data)
+    bodyStack1 = this.getExperienceDetails(data, bodyStack1)
+    bodyStack1 = this.getEducationDetails(data, bodyStack1)
+    bodyStack2 = this.getSkills(data, bodyStack2)
+    bodyStack2 = this.getProjectDetails(data, bodyStack2)
+    bodyStack2 = this.getCertificatesDetails(data, bodyStack2)
+    bodyStack2 = this.getLanguage(data, bodyStack2)
+    bodyStack2 = this.getInterest(data, bodyStack2)
+    bodyStack2 = this.getSoftSkills(data, bodyStack2)
 
     let pdfData: any = {
       "content": [
@@ -32,8 +35,7 @@ export class GenerateResumeService {
             [
               {
                 type: 'line',
-                x1: 0, y1: 5,
-                x2: 500, y2: 5,
+                x1: 0, y1: 5, x2: 500, y2: 5,
                 lineWidth: 1
               },
             ]
@@ -43,173 +45,20 @@ export class GenerateResumeService {
             {
               width: 280,
               "stack": [
-                {
-                  "columns": [
-                    {
-                      "text": "WORK EXPERIENCE",
-                      "style": "subheader"
-                    }
-                  ]
-                },
-                experienceDetails,
-
-                {
-                  "columns": [
-                    {
-                      "text": "EDUCATION",
-                      "style": "subheader"
-                    }
-                  ]
-                },
-                educationDetails
+                bodyStack1
               ]
             },
-
             {
               width: 200,
               "stack": [
-                {
-                  "columns": [
-                    {
-                      "text": "SKILLS",
-                      "style": "subheader"
-                    }
-                  ]
-                },
-                skills,
-
-                {
-                  "columns": [
-                    {
-                      "text": "PERSONAL PROJECTS",
-                      "style": "subheader"
-                    }
-                  ]
-                },
-                projectDetails,
-
-                {
-                  "columns": [
-                    {
-                      "text": "EXTRACURRICULAR ACTIVITIES",
-                      "style": "subheader"
-                    }
-                  ]
-                },
-                certificateDetails,
-
-                {
-                  "columns": [
-                    {
-                      "text": "LANGUAGES",
-                      "style": "subheader"
-                    }
-                  ]
-                },
-                language,
-
-                {
-                  "columns": [
-                    {
-                      "text": "INTEREST",
-                      "style": "subheader"
-                    }
-                  ]
-                },
-                interest,
-
-                {
-                  "columns": [
-                    {
-                      "text": "SOFT SKILLS",
-                      "style": "subheader"
-                    }
-                  ]
-                },
-                softSkills
+                bodyStack2
               ]
             }
           ]
         }
       ],
-      "styles": {
-        "header": {
-          "bold": true,
-          "fontSize": 30
-        },
-        "subheader": {
-          "bold": true,
-          "fontSize": 13,
-          "color": "#005074",
-          "margin": [
-            0,
-            15,
-            0,
-            0
-          ]
-        },
-        "title": {
-          "bold": true,
-          "fontSize": 11,
-          "margin": [
-            0,
-            3,
-            0,
-            0
-          ]
-        },
-        "subtitle": {
-          "fontSize": 12
-        },
-        "info": {
-          "margin": [
-            10,
-            0,
-            0,
-            0
-          ]
-        },
-        "boldinfo": {
-          "fontSize": 10,
-          "bold": true,
-          "margin": [
-            10,
-            0,
-            0,
-            0
-          ]
-        },
-        "list": {
-          "margin": [
-            10,
-            0,
-            0,
-            0
-          ]
-        },
-        "italicInfo": {
-          "italics": true,
-          "color": "#aaaaab"
-        },
-        "rightItalicInfo": {
-          "italics": true,
-          "color": "#aaaaab",
-          "alignment": "right"
-        },
-        "svgIcon": {
-          "margin": [
-            -15,
-            0,
-            0,
-            0
-          ]
-        }
-      },
-      "defaultStyle": {
-        "columnGap": 20,
-        "lineHeight": 1.1,
-        "fontSize": 9
-      }
+      "styles": pdfMakeStyles,
+      "defaultStyle": pdfMakeDefaultStyles
     }
 
     let finalResponse = {
@@ -508,367 +357,455 @@ export class GenerateResumeService {
     }
   }
 
-  getExperienceDetails(data: any) {
-    let experienceDetails: any = []
-    data.experienceDetails.forEach((experience: any) => {
-      let experienceStack = []
-      if (experience.position) {
-        experienceStack.push({
-          "columns": [
-            {
-              "text": `${experience.position}`,
-              "style": "title"
-            },
-          ]
-        })
-      }
-      if (experience.company) {
-        experienceStack.push({
-          "columns": [
-            {
-              "text": `${experience.company}`,
-              "style": "subtitle"
-            },
-          ]
-        })
-      }
-
-      if (experience.joinedDate || experience.leftDate || experience.city) {
-        experienceStack.push({
-          "columns": [
-            {
-              "text": `${experience.joinedDate} - ${experience.leftDate}`,
-              "style": "italicInfo"
-            },
-            {
-              "text": `${experience.city}`,
-              "style": "rightItalicInfo"
-            }
-          ]
-        })
-      }
-      if (experience.companyDescription) {
-        experienceStack.push({
-          "columns": [
-            {
-              "text": `${experience.companyDescription}`,
-              "alignment": "justify"
-            },
-          ]
-        })
-      }
-      if (experience.projects && experience.projects.length) {
-
-        experienceStack.push({
-          "columns": [
-            {
-              "text": "Projects",
-              "style": "italicInfo"
-            },
-          ]
-        })
-
-        let projectArray: any = [];
-        experience.projects.forEach((project: any) => {
-          projectArray.push({
+  getExperienceDetails(data: any, bodyStack1: Array<any>) {
+    if (data.experienceDetails && data.experienceDetails.length && !_.values(data.experienceDetails[0]).every(_.isEmpty)) {
+      let experienceDetails: any = []
+      data.experienceDetails.forEach((experience: any) => {
+        let experienceStack = []
+        if (experience.position) {
+          experienceStack.push({
             "columns": [
               {
-                "text": `${project}`,
-                "alignment": "left",
-                "style": "list"
+                "text": `${experience.position}`,
+                "style": "title"
               },
             ]
           })
-        });
-        experienceStack.push({
-          ul: projectArray
-        })
-      }
-      if (experience.rolesAndResponsibility) {
-        experienceStack.push({
-          "columns": [
-            {
-              "text": "Role and Responsibility",
-              "style": "italicInfo"
-            },
-          ]
-        })
-        experienceStack.push({
-          "columns": [
-            {
-              "text": `${experience.rolesAndResponsibility}`,
-              "alignment": "justify",
-              "style": "info"
-            }
-          ]
-        })
-      }
-
-      experienceDetails.push({
-        "columns": [
-          {
-            "stack": experienceStack
-          }
-        ]
-      })
-    });
-
-    return {
-      "columns": [
-        {
-          ul: experienceDetails
         }
-      ]
-    }
-  }
-
-  getEducationDetails(data: any) {
-    let educationDetails: any = []
-    data.educationDetails.forEach((education: any) => {
-      let experienceStack = []
-      if (education.education) {
-        experienceStack.push({
-          "columns": [
-            {
-              "text": `${education.education}`,
-              "style": "title"
-            },
-          ]
-        })
-      }
-      if (education.institution) {
-        experienceStack.push({
-          "columns": [
-            {
-              "text": `${education.institution}`,
-              "style": "subtitle"
-            }
-          ]
-        })
-      }
-
-      if (education.joinedDate || education.leftDate) {
-        experienceStack.push({
-          "columns": [
-            {
-              "text": `${education.joinedDate} - ${education.leftDate}`,
-              "style": "italicInfo"
-            },
-            {
-              "text": `${education.resultType} : ${education.resultValue}`,
-              "style": "rightItalicInfo"
-            }
-          ]
-        })
-      }
-
-      if (education.course && education.course.length) {
-        experienceStack.push({
-          "columns": [
-            {
-              "text": "Course",
-              "style": "italicInfo"
-            },
-          ]
-        })
-
-        let courseArray: any = [];
-        education.course.forEach((course: any) => {
-          courseArray.push({
+        if (experience.company) {
+          experienceStack.push({
             "columns": [
               {
-                "text": `${course}`,
-                "alignment": "left",
-                "style": "list"
+                "text": `${experience.company}`,
+                "style": "subtitle"
               },
             ]
           })
-        });
-        experienceStack.push({
-          ul: courseArray
-        })
-      }
+        }
 
-      educationDetails.push({
+        if (experience.joinedDate || experience.leftDate || experience.city) {
+          experienceStack.push({
+            "columns": [
+              {
+                "text": `${experience.joinedDate} - ${experience.leftDate}`,
+                "style": "italicInfo"
+              },
+              {
+                "text": `${experience.city}`,
+                "style": "rightItalicInfo"
+              }
+            ]
+          })
+        }
+        if (experience.companyDescription) {
+          experienceStack.push({
+            "columns": [
+              {
+                "text": `${experience.companyDescription}`,
+                "alignment": "justify"
+              },
+            ]
+          })
+        }
+        if (experience.projects && experience.projects.length) {
+
+          experienceStack.push({
+            "columns": [
+              {
+                "text": "Projects",
+                "style": "italicInfo"
+              },
+            ]
+          })
+
+          let projectArray: any = [];
+          experience.projects.forEach((project: any) => {
+            projectArray.push({
+              "columns": [
+                {
+                  "text": `${project}`,
+                  "alignment": "left",
+                  "style": "list"
+                },
+              ]
+            })
+          });
+          experienceStack.push({
+            ul: projectArray
+          })
+        }
+        if (experience.rolesAndResponsibility) {
+          experienceStack.push({
+            "columns": [
+              {
+                "text": "Role and Responsibility",
+                "style": "italicInfo"
+              },
+            ]
+          })
+          experienceStack.push({
+            "columns": [
+              {
+                "text": `${experience.rolesAndResponsibility}`,
+                "alignment": "justify",
+                "style": "info"
+              }
+            ]
+          })
+        }
+
+        experienceDetails.push({
+          "columns": [
+            {
+              "stack": experienceStack
+            }
+          ]
+        })
+      });
+
+      bodyStack1.push({
         "columns": [
           {
-            "stack": experienceStack
+            "text": "WORK EXPERIENCE",
+            "style": "subheader"
           }
         ]
       })
-    });
-
-    return {
-      "columns": [
-        {
-          ul: educationDetails
-        }
-      ]
-    }
-  }
-
-  getProjectDetails(data: any) {
-    let projectDetails: any = []
-    data.projectDetails.forEach((project: any) => {
-      let projectStack = []
-      if (project.projectName) {
-        projectStack.push({
-          "columns": [
-            {
-              "text": `${project.projectName}`,
-              "style": "title"
-            },
-          ]
-        })
-      }
-      if (project.startDate || project.endDate) {
-        projectStack.push({
-          "columns": [
-            {
-              "text": `${project.startDate} - ${project.endDate}`,
-              "style": "italicInfo"
-            }
-          ]
-        })
-      }
-      if (project.projectDetails) {
-        projectStack.push({
-          "columns": [
-            {
-              "text": `${project.projectDetails}`,
-              "alignment": "justify",
-              "style": "info"
-            }
-          ]
-        })
-      }
-
-      projectDetails.push({
+      bodyStack1.push({
         "columns": [
           {
-            "stack": projectStack
+            ul: experienceDetails
           }
         ]
       })
-    });
-
-    return {
-      "columns": [
-        {
-          ul: projectDetails
-        }
-      ]
+      return bodyStack1;
+    } else {
+      return bodyStack1;
     }
   }
 
-  getCertificatesDetails(data: any) {
-    let certificates: any = []
-    data.certificates.forEach((certificate: any) => {
-      let certificateStack = []
-      if (certificate.certificateNames) {
-        certificateStack.push({
-          "columns": [
-            {
-              "text": `${certificate.certificateNames}`,
-              "style": "title"
-            },
-          ]
-        })
-      }
-      if (certificate.certificateStartDate || certificate.certificateEndDate) {
-        certificateStack.push({
-          "columns": [
-            {
-              "text": `${certificate.certificateStartDate} - ${certificate.certificateEndDate}`,
-              "style": "italicInfo"
-            }
-          ]
-        })
-      }
-      if (certificate.certificateDetails) {
-        certificateStack.push({
-          "columns": [
-            {
-              "text": `${certificate.certificateDetails}`,
-              "alignment": "justify",
-              "style": "info"
-            }
-          ]
-        })
-      }
+  getEducationDetails(data: any, bodyStack1: Array<any>) {
+    if (data.educationDetails && data.educationDetails.length && !_.values(data.educationDetails[0]).every(_.isEmpty)) {
+      let educationDetails: any = []
+      data.educationDetails.forEach((education: any) => {
+        let experienceStack = []
+        if (education.education) {
+          experienceStack.push({
+            "columns": [
+              {
+                "text": `${education.education}`,
+                "style": "title"
+              },
+            ]
+          })
+        }
+        if (education.institution) {
+          experienceStack.push({
+            "columns": [
+              {
+                "text": `${education.institution}`,
+                "style": "subtitle"
+              }
+            ]
+          })
+        }
 
-      certificates.push({
+        if (education.joinedDate || education.leftDate) {
+          experienceStack.push({
+            "columns": [
+              {
+                "text": `${education.joinedDate} - ${education.leftDate}`,
+                "style": "italicInfo"
+              },
+              {
+                "text": `${education.resultType} : ${education.resultValue}`,
+                "style": "rightItalicInfo"
+              }
+            ]
+          })
+        }
+
+        if (education.course && education.course.length) {
+          experienceStack.push({
+            "columns": [
+              {
+                "text": "Course",
+                "style": "italicInfo"
+              },
+            ]
+          })
+
+          let courseArray: any = [];
+          education.course.forEach((course: any) => {
+            courseArray.push({
+              "columns": [
+                {
+                  "text": `${course}`,
+                  "alignment": "left",
+                  "style": "list"
+                },
+              ]
+            })
+          });
+          experienceStack.push({
+            ul: courseArray
+          })
+        }
+
+        educationDetails.push({
+          "columns": [
+            {
+              "stack": experienceStack
+            }
+          ]
+        })
+      });
+
+      bodyStack1.push({
         "columns": [
           {
-            "stack": certificateStack
+            "text": "EDUCATION",
+            "style": "subheader"
           }
         ]
       })
-    });
-
-    return {
-      "columns": [
-        {
-          ul: certificates
-        }
-      ]
+      bodyStack1.push({
+        "columns": [
+          {
+            ul: educationDetails
+          }
+        ]
+      })
+      return bodyStack1;
+    } else {
+      return bodyStack1;
     }
   }
 
-  getSkills(data: any) {
+  getProjectDetails(data: any, bodyStack2: Array<any>) {
+    if (data.projectDetails && data.projectDetails.length && !_.values(data.projectDetails[0]).every(_.isEmpty)) {
+      let projectDetails: any = []
+      data.projectDetails.forEach((project: any) => {
+        let projectStack = []
+        if (project.projectName) {
+          projectStack.push({
+            "columns": [
+              {
+                "text": `${project.projectName}`,
+                "style": "title"
+              },
+            ]
+          })
+        }
+        if (project.startDate || project.endDate) {
+          projectStack.push({
+            "columns": [
+              {
+                "text": `${project.startDate} - ${project.endDate}`,
+                "style": "italicInfo"
+              }
+            ]
+          })
+        }
+        if (project.projectDetails) {
+          projectStack.push({
+            "columns": [
+              {
+                "text": `${project.projectDetails}`,
+                "alignment": "justify",
+                "style": "info"
+              }
+            ]
+          })
+        }
+
+        projectDetails.push({
+          "columns": [
+            {
+              "stack": projectStack
+            }
+          ]
+        })
+      });
+
+      bodyStack2.push({
+        "columns": [
+          {
+            "text": "PERSONAL PROJECTS",
+            "style": "subheader"
+          }
+        ]
+      })
+      bodyStack2.push({
+        "columns": [
+          {
+            ul: projectDetails
+          }
+        ]
+      })
+      return bodyStack2;
+    } else {
+      return bodyStack2;
+    }
+  }
+
+  getCertificatesDetails(data: any, bodyStack2: Array<any>) {
+    if (data.certificates && data.certificates.length && !_.values(data.certificates[0]).every(_.isEmpty)) {
+      let certificates: any = []
+      data.certificates.forEach((certificate: any) => {
+        let certificateStack = []
+        if (certificate.certificateNames) {
+          certificateStack.push({
+            "columns": [
+              {
+                "text": `${certificate.certificateNames}`,
+                "style": "title"
+              },
+            ]
+          })
+        }
+        if (certificate.certificateStartDate || certificate.certificateEndDate) {
+          certificateStack.push({
+            "columns": [
+              {
+                "text": `${certificate.certificateStartDate} - ${certificate.certificateEndDate}`,
+                "style": "italicInfo"
+              }
+            ]
+          })
+        }
+        if (certificate.certificateDetails) {
+          certificateStack.push({
+            "columns": [
+              {
+                "text": `${certificate.certificateDetails}`,
+                "alignment": "justify",
+                "style": "info"
+              }
+            ]
+          })
+        }
+
+        certificates.push({
+          "columns": [
+            {
+              "stack": certificateStack
+            }
+          ]
+        })
+      });
+
+      bodyStack2.push({
+        "columns": [
+          {
+            "text": "CERTIFICATES",
+            "style": "subheader"
+          }
+        ]
+      })
+      bodyStack2.push({
+        "columns": [
+          {
+            ul: certificates
+          }
+        ]
+      })
+      return bodyStack2;
+    } else {
+      return bodyStack2;
+    }
+  }
+
+  getSkills(data: any, bodyStack2: Array<any>) {
     if (data.otherDetails && data.otherDetails.skills) {
-      return {
+      bodyStack2.push({
+        "columns": [
+          {
+            "text": "SKILLS",
+            "style": "subheader"
+          }
+        ]
+      })
+      bodyStack2.push({
         "columns": [
           {
             "text": data.otherDetails.skills.join(', '),
             "style": "boldinfo"
           }
         ]
-      }
+      })
+      return bodyStack2;
     } else {
-      return {}
+      return bodyStack2;
     }
   }
-  getSoftSkills(data: any) {
+  getSoftSkills(data: any, bodyStack2: Array<any>) {
     if (data.otherDetails && data.otherDetails.softSkills) {
-      return {
+      bodyStack2.push({
+        "columns": [
+          {
+            "text": "SOFT SKILLS",
+            "style": "subheader"
+          }
+        ]
+      })
+      bodyStack2.push({
         "columns": [
           {
             "text": data.otherDetails.softSkills.join(', '),
             "style": "boldinfo"
           }
         ]
-      }
+      })
+      return bodyStack2;
     } else {
-      return {}
+      return bodyStack2;
     }
   }
-  getInterest(data: any) {
+  getInterest(data: any, bodyStack2: Array<any>) {
     if (data.otherDetails && data.otherDetails.interest) {
-      return {
+      bodyStack2.push({
+        "columns": [
+          {
+            "text": "INTEREST",
+            "style": "subheader"
+          }
+        ]
+      })
+      bodyStack2.push({
         "columns": [
           {
             "text": data.otherDetails.interest.join(', '),
             "style": "boldinfo"
           }
         ]
-      }
+      })
+      return bodyStack2;
     } else {
-      return {}
+      return bodyStack2;
     }
   }
-  getLanguage(data: any) {
+  getLanguage(data: any, bodyStack2: Array<any>) {
     if (data.otherDetails && data.otherDetails.language) {
-      return {
+      bodyStack2.push({
+        "columns": [
+          {
+            "text": "LANGUAGES",
+            "style": "subheader"
+          }
+        ]
+      })
+      bodyStack2.push({
         "columns": [
           {
             "text": data.otherDetails.language.join(', '),
             "style": "boldinfo"
           }
         ]
-      }
+      })
+      return bodyStack2;
     } else {
-      return {}
+      return bodyStack2;
     }
   }
 }
