@@ -659,6 +659,126 @@
                 <button type="button" mat-fab class="btn-navigate mr-2" matStepperPrevious>
                     <mat-icon>navigate_before</mat-icon>
                 </button>
+                <button type="button" mat-fab class="btn-navigate" matStepperNext>
+                    <mat-icon>navigate_next</mat-icon>
+                </button>
+            </div>
+        </mat-step>
+
+        <mat-step>
+            <ng-template matStepLabel>
+                <span class="title"> Layout </span>
+            </ng-template>
+            <div class="row">
+                <div class="col-4">
+                    <div class="form-field">
+                        <div class="form-field-control">
+                            <table style="width:100%">
+                                <tr>
+                                    <th>Personal Details</th>
+                                    <th>Contacts</th>
+                                </tr>
+
+                                <tr>
+                                    <th rowspan="3">Work</th>
+                                    <th>Skills</th>
+                                </tr>
+                                <tr>
+                                    <th>Projects</th>
+                                </tr>
+                                <tr>
+                                    <th>Achievements</th>
+                                </tr>
+
+                                <tr>
+                                    <th rowspan="3">Education</th>
+                                    <th>Language</th>
+                                </tr>
+                                <tr>
+                                    <th>Interest</th>
+                                </tr>
+                                <tr>
+                                    <th>Soft Skills</th>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="form-field">
+                        <div class="form-field-control">
+                            <table style="width:100%">
+                                <tr>
+                                    <th>Personal Details</th>
+                                    <th>Contacts</th>
+                                </tr>
+
+                                <tr>
+                                    <th rowspan="3">Work</th>
+                                    <th>Skills</th>
+                                </tr>
+                                <tr>
+                                    <th>Education</th>
+                                </tr>
+                                <tr>
+                                    <th>Achievements</th>
+                                </tr>
+
+                                <tr>
+                                    <th rowspan="3">Projects</th>
+                                    <th>Language</th>
+                                </tr>
+                                <tr>
+                                    <th>Interest</th>
+                                </tr>
+                                <tr>
+                                    <th>Soft Skills</th>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="form-field">
+                        <div class="form-field-control">
+                            <table style="width:100%">
+                                <tr>
+                                    <th></th>
+                                    <th rowspan="1">Personal Details</th>
+                                </tr>
+
+                                <tr>
+                                    <th>Contacts</th>
+                                    <th rowspan="2">Work</th>
+                                </tr>
+                                <tr>
+                                    <th>Skills</th>
+                                </tr>
+
+                                <tr>
+                                    <th>Language</th>
+                                    <th rowspan="2">Education</th>
+                                </tr>
+                                <tr>
+                                    <th>Interest</th>
+                                </tr>
+
+                                <tr>
+                                    <th>Achievements</th>
+                                    <th rowspan="2">Projects</th>
+                                </tr>
+                                <tr>
+                                    <th>softSkills</th>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="example-button-container float-right">
+                <button type="button" mat-fab class="btn-navigate mr-2" matStepperPrevious>
+                    <mat-icon>navigate_before</mat-icon>
+                </button>
                 <button type="button" mat-fab class="btn-navigate" matTooltip="View Result" (click)="viewResult()">
                     <mat-icon>screen_share</mat-icon>
                 </button>

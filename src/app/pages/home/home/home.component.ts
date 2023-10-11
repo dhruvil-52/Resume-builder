@@ -236,7 +236,7 @@ export class HomeComponent implements OnInit {
   }
 
   viewResult() {
-    console.log("form", JSON.stringify(this.formDetails.value))
+    // console.log("form", JSON.stringify(this.formDetails.value))
     this.resumeBuilderService.generateResume(this.formDetails.value)
   }
 

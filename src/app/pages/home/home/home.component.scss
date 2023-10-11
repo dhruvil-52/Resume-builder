@@ -3,3 +3,10 @@
     font-size: medium;
     color: #005074;
 }
+
+table,
+th,
+td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
